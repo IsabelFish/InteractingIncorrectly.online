@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 146.38 147.41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-2 {
+        fill: #a6a6ff;
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="73.19" cy="73.19" fx="73.19" fy="73.19" r="73.19" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0002f2"/>
+      <stop offset=".09" stop-color="#0304f2" stop-opacity=".96"/>
+      <stop offset=".23" stop-color="#0c0df3" stop-opacity=".87"/>
+      <stop offset=".41" stop-color="#1b1af5" stop-opacity=".71"/>
+      <stop offset=".62" stop-color="#2f2cf8" stop-opacity=".49"/>
+      <stop offset=".84" stop-color="#4943fc" stop-opacity=".21"/>
+      <stop offset="1" stop-color="#5d55ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g>
+    <circle class="cls-1" cx="73.19" cy="73.19" r="73.19"/>
+    <path d="M73.19,2.5l11.62,31.39c5.05,13.64,15.8,24.4,29.44,29.44l31.39,11.62-31.39,11.62c-13.64,5.05-24.4,15.8-29.44,29.44l-11.62,31.39-11.62-31.39c-5.05-13.64-15.8-24.4-29.44-29.44L.74,74.96l31.39-11.62c13.64-5.05,24.4-15.8,29.44-29.44l11.62-31.39Z"/>
+  </g>
+  <path class="cls-2" d="M78.29,76.65l11.79,11.62c.94.92.95,2.43.02,3.36h0c-.92.93-2.43.95-3.36.02l-11.89-11.72c-.93-.91-2.41-.91-3.34,0l-11.89,11.72c-.93.92-2.44.91-3.36-.02h0c-.92-.94-.91-2.44.02-3.36l11.79-11.62c.95-.93.94-2.46,0-3.39l-11.8-11.62c-.93-.92-.95-2.43-.03-3.36h0c.92-.94,2.43-.95,3.36-.03l11.89,11.72c.93.91,2.41.91,3.34,0l11.89-11.72c.94-.92,2.44-.91,3.36.03h0c.92.94.91,2.44-.03,3.36l-11.8,11.62c-.95.93-.95,2.46,0,3.39Z"/>
+</svg>
