@@ -1,0 +1,749 @@
+:root {
+  --main-color: rgb(134, 148, 255);
+  --text-color: rgb(255, 255, 255);
+  --button-color: rgb(191, 246, 171);
+  --button-hover: rgb(114, 212, 117);
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(0%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+::selection {
+  color: rgb(255, 226, 176);
+  background: rgb(255, 97, 18);
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+canvas {
+  z-index: 2;
+  position: fixed;
+  pointer-events:none;
+  left: 0;
+  top: 0;
+}
+
+
+html, body {
+  overflow: hidden;
+}
+
+body {
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  height: var(--app-height);
+}
+
+section {
+  margin: auto;
+  position: absolute;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+}
+
+.draggable {
+  z-index: 9999;
+  position: absolute;
+  cursor: move;
+  background: url(https://static.vecteezy.com/system/resources/previews/011/973/413/non_2x/cat-face-cute-free-download-transparent-image-illustration-clipart-pet-wildlife-free-png.png);
+  background-size: 100% 100%;
+  background-position: center;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display:none;
+}
+
+
+button {
+  position: relative;
+
+  font-family: "Roboto Condensed", sans-serif;
+  font-stretch: condensed;
+  font-size: 16px;
+  line-height: 1.1em;
+  text-transform: lowercase;
+  user-select: none;
+  padding: 0 4.5px;
+
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: var(--button-color);
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+.enough {
+  z-index: 9999;
+  position: fixed;
+  height:0; 
+  width:fit-content; 
+  top: 55px;
+  left: 55px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.enough button:nth-of-type(1) {
+  transform: rotate(-90deg);
+  top: 100px;
+  left: -18px;
+}
+.enough button:nth-of-type(2) {
+  transform: rotate(-80deg);
+  top: 55px;
+  left: -60px;
+}
+.enough button:nth-of-type(3) {
+  transform: rotate(-60deg);
+  top: 24px;
+  left: -80px;
+}
+.enough button:nth-of-type(4) {
+  transform: rotate(-30deg);
+  top: 1px;
+  left: -90px;
+}
+.enough button:nth-of-type(5) {
+  transform: rotate(0deg);
+  top: -4px;
+  left: -90px;
+}
+.enough button:nth-of-type(6) {
+  transform: rotate(0deg);
+  top: -4px;
+  left: -90px;
+}
+.enough button:nth-of-type(7) {
+  transform: rotate(0deg);
+  top: -4px;
+  left: -90px;
+}
+.enough button:nth-of-type(8) {
+  transform: rotate(20deg);
+  top: -2px;
+  left: -95px;
+}
+
+.leave {
+  z-index: 9999;
+  position: fixed;
+  height:0; 
+  width:fit-content; 
+  overflow: visible;
+  bottom: 72px;
+  right: 52px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.leave button:nth-of-type(1) {
+  transform: rotate(0deg);
+  bottom: 1px;
+  right: -40px;
+}
+.leave button:nth-of-type(2) {
+  transform: rotate(-10deg);
+  bottom: 5px;
+  right: -40px;
+}
+.leave button:nth-of-type(3) {
+  transform: rotate(-50deg);
+  bottom: 23px;
+  right: -35px;
+}
+.leave button:nth-of-type(4) {
+  transform: rotate(-90deg);
+  bottom: 60px;
+  right: -5px;
+}
+
+/* popup */
+
+#popup {
+  position: fixed;
+  z-index: 999999;
+  max-width: 1700px;
+  max-height: 1500px;
+  width: calc(100vw - 110px);
+  height: calc(100vh - 100px);
+  background: linear-gradient(rgb(88, 88, 202), rgb(243, 255, 243), rgb(67, 139, 88));
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 50px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+ 
+  opacity: 0;
+  transition: opacity 2s ease;
+  display: none;
+}
+
+#popup.visible {
+  display: block;
+  opacity: 1;
+}
+
+.popupContent {
+  text-align:center;
+  color: black;
+  background: radial-gradient(rgb(255, 211, 207), rgba(0, 0, 0, 0) 70%);
+
+  overflow: scroll;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  cursor:default;
+}
+
+.popDesc {
+  font-family: "chivo-mono", sans-serif;
+  font-size: 15px;
+
+  position: absolute;
+  text-align:left;
+  width: 460px;
+  font-size: 15px;
+  overflow: visible;
+}
+
+.popTitle {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 22px!important;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.incorrectly{
+  transition: 0.5s;
+  display: inline-block;
+  transform: translateY(0px) rotate(0deg) ;
+}
+
+span:hover {
+  transition: 2s;
+  transform: translateY(5px) rotate(5deg) ;
+}
+
+hr {
+  border: 0.5px solid black; 
+}
+
+.horseLine {
+  width: 100%;
+  height: fit-content;
+  padding-top: 5px;
+}
+
+hr:first-of-type {
+  width: 1020px;
+}
+
+.popWeb {
+  font-family: "chivo-mono", sans-serif;
+
+  position: absolute;
+  text-align: left;
+  width: 460px;
+  left: 590px; 
+  top: 110px;
+}
+
+.popSubPara {
+  margin: 0;
+  font-size: 15px;
+}
+
+ul { 
+  font-size: 20px;
+  padding: 0;
+  width: fit-content;
+}
+
+.listLinks {
+  position: relative;
+}
+
+.numLi {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+}
+
+.popLink {
+  list-style: none;
+  left: 0;
+}
+
+.popLinka {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid black;
+}
+
+.popLinka:hover {
+  display: inline-block;
+  transform: rotate(3deg);
+  color: rgb(159, 0, 0);
+  border-bottom: 1px solid rgb(159, 0, 0);
+}
+
+.popCred {
+  position: absolute;
+  bottom: 30px;
+  right: 50px;
+
+  color: white;
+  font-family: "chivo-mono", sans-serif;
+  font-size: 15px;
+  filter: blur(0px);
+  transition: 0.5s;
+}
+
+.popCred:hover {
+  filter: blur(5px);
+  transition: 5s;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+.popupClose {
+  z-index: 9999999;
+  height: 120px;
+  width: 120px;
+  position: fixed;
+  border-radius: 50%;
+
+  background: radial-gradient(rgb(255, 255, 255) );
+  border: 1px solid rgb(255, 72, 0);
+  background-size: cover;
+  color: rgb(255, 72, 0);
+  font-family: "chivo-mono", monospace;
+  font-size: 20px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 1.5s;
+  cursor: pointer;
+  transition: 1s;
+  user-select: none;
+}
+
+.popupClose:hover {
+  background: radial-gradient(rgb(255, 194, 194) );
+  border: 1px solid rgb(255, 72, 0);
+}
+
+.popupClose:nth-of-type(1) {
+  font-size: 30px;
+  height: 150px;
+  width: 150px;
+  top: 20px;
+  right: -10px;
+}
+
+.popupClose:nth-of-type(2) {
+  top: -30px;
+  right: 110px;
+}
+
+.popupClose:nth-of-type(3) {
+  font-size:13px;
+  height: 70px;
+  width: 70px;
+  top: 330px;
+  right: -20px;
+}
+
+.popupClose:nth-of-type(4) {
+  bottom: -20px;
+  left: 50px;
+}
+
+.popupClose:nth-of-type(5) {
+  font-size: 15px;
+  height: 80px;
+  width: 80px;
+  top: 150px;
+  right: 30px;
+}
+
+.popupClose:nth-of-type(6) {
+  font-size: 15px;
+  height: 90px;
+  width: 90px;
+  bottom: 80px;
+  left: -30px;
+}
+
+
+/* TEXT */
+
+#hideBg {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  pointer-events: none;
+  /* animation: 5s fadeInUp; */
+}
+
+#hideBg:nth-child(2) {
+  transform: rotate(180deg);
+  height: fit-content;
+  bottom: 0px;
+  top:auto;
+}
+
+.corner {
+  z-index: 1;
+  position: fixed;
+  width: fit-conent;
+  height: fit-conent;
+  margin: 10px;
+  overflow:visible;
+
+  font-family: "benda", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  user-select: none;
+  text-shadow: 0 0 2px var(--main-color), 0 0 3px var(--main-color), 0 0 4px var(--main-color), 0 0 5px var(--main-color), 0 0 5px var(--main-color), 0 0 5px var(--main-color);
+
+}
+
+.look {
+  position: relative;
+  left: 40px;
+  top: -15px;
+  transform: rotate(-90deg) ;
+  transform-origin: 0% 100%;
+}
+
+.around {
+  position: relative;
+  top: -30px;
+  left: 10px;
+}
+
+.corner:nth-of-type(2) {
+  transform: rotate(90deg);
+  top: -23px;
+  right: 25px;
+}
+
+#bgHorse {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 99;
+  width: 70vw;
+  height: 80vh;
+
+  pointer-events: none;
+}
+
+.link {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+
+  filter: brightness(0) saturate(100%) invert(16%) sepia(65%) saturate(591%) hue-rotate(207deg) brightness(95%) contrast(93%);
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+}
+
+.link:hover {
+  filter: none;
+  transform: rotate(5deg);
+}
+
+.areaOfText {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 17px;
+  color: black; 
+  width: 71px;
+  height: 34.5px;
+  user-select: none;
+  background: rgb(255, 255, 255);
+  border-radius: 8px;
+}
+
+.areaOfText:focus {
+  background-color: lightgray;
+}
+
+.withText {
+  background: none!important;
+  color: rgb(255, 255, 255);
+  position: relative;
+}
+
+.withText:focus {
+  height: 200px;
+}
+
+@media (max-width: 1320px) {
+  .popDesc {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    text-align:left;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  hr:first-of-type {
+    width: auto;
+  }
+
+  .popWeb {
+    font-family: "chivo-mono", sans-serif;
+  
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin: auto;
+    top: 0;
+    left: 0;
+  }
+
+  .popCred {
+    position: relative;
+    margin-top: 50px;
+    bottom: 0px;
+    right: 0px;
+  
+    color: white;
+    font-family: "chivo-mono", sans-serif;
+    font-size: 15px;
+    filter: blur(0px);
+    transition: 0.5s;
+  }
+
+  .popTitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 20px!important;
+    margin: 0;
+    padding-bottom: 5px;
+    padding: 0 70px 0 0px;
+
+  }
+}
+
+@media (max-width: 860px) {
+  .popTitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 20px!important;
+    margin: 0;
+    padding-bottom: 5px;
+    padding: 0 160px 0 0px;
+  }
+
+  .popupClose:nth-of-type(1) {
+    font-size: 20px;
+    height: 100px;
+    width: 100px;
+    top: 15px;
+    right: -10px;
+  }
+  
+  .popupClose:nth-of-type(2) {
+    font-size: 15px;
+    height: 70px;
+    width: 70px;
+    top: -10px;
+    right: 70px;
+  }
+  
+  .popupClose:nth-of-type(3) {
+    font-size:11px;
+    height: 55px;
+    width: 55px;
+    top: 330px;
+    right: -20px;
+  }
+  
+  .popupClose:nth-of-type(4) {
+    font-size: 13px;
+    height: 60px;
+    width: 60px;
+    bottom: -10px;
+    left: 50px;
+  }
+  
+  .popupClose:nth-of-type(5) {
+    font-size: 13px;
+    height: 60px;
+    width: 60px;
+    top: 110px;
+    right: -5px;
+  }
+  
+  .popupClose:nth-of-type(6) {
+    font-size: 15px;
+    height: 90px;
+    width: 90px;
+    bottom: 20px;
+    left: -20px;
+  }
+}
+
+@media (max-width: 565px) {
+  #popup {
+    width: calc(100vw - 110px);
+    height: calc(100vh - 160px);
+  }
+
+  .lineHeight {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .popWeb {
+    font-size: 12px;
+  }
+  
+  .popCred {
+    position: relative;
+    margin-top: 50px;
+    bottom: 0px;
+    right: 0px;
+    padding: 0 40px;
+  
+    color: white;
+    font-family: "chivo-mono", sans-serif;
+    font-size: 12px;
+    filter: blur(0px);
+    transition: 0.5s;
+  }
+
+  ul { 
+    font-size: 14px;
+    padding: 0;
+    width: fit-content;
+  }
+
+  .popTitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 20px!important;
+    margin: 0;
+    padding-bottom: 5px;
+    padding: 0 60px 0 0;
+
+  }
+
+  .areaOfText {
+    width: 25%!important;
+    height: 34px;
+  }
+}
+
+@media (max-width: 400px) {
+  .popNum {
+    display: none;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 565px) {
+  .popupClose:nth-of-type(1) {
+    font-size: 20px;
+    height: 100px;
+    width: 100px;
+    top: 15px;
+    right: -10px;
+  }
+  
+  .popupClose:nth-of-type(2) {
+    font-size: 15px;
+    height: 70px;
+    width: 70px;
+    top: -10px;
+    right: 70px;
+  }
+  
+  .popupClose:nth-of-type(3) {
+    font-size:11px;
+    height: 55px;
+    width: 55px;
+    top: 330px;
+    right: -20px;
+  }
+  
+  .popupClose:nth-of-type(4) {
+    font-size: 13px;
+    height: 60px;
+    width: 60px;
+    bottom: -10px;
+    left: 50px;
+  }
+  
+  .popupClose:nth-of-type(5) {
+    font-size: 13px;
+    height: 60px;
+    width: 60px;
+    top: 110px;
+    right: -5px;
+  }
+  
+  .popupClose:nth-of-type(6) {
+    font-size: 15px;
+    height: 90px;
+    width: 90px;
+    bottom: 20px;
+    left: -20px;
+  }
+
+}
