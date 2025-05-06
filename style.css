@@ -189,8 +189,6 @@ button:hover {
 #popup {
   position: fixed;
   z-index: 999999;
-  max-width: 1700px;
-  max-height: 1500px;
   width: calc(100vw - 110px);
   height: calc(100vh - 100px);
   background: linear-gradient(rgb(88, 88, 202), rgb(243, 255, 243), rgb(67, 139, 88));
