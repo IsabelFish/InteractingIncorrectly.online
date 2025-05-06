@@ -640,8 +640,8 @@ ul {
 
 @media (max-width: 565px) {
   #popup {
-    width: calc(100vw - 110px);
-    height: calc(100vh - 160px);
+    width: calc(100dvw - 110px);
+    height: calc(100dvh - 100px);
   }
 
   .lineHeight {
