@@ -364,22 +364,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // BACK TO INDEX AFTER 1 MIN NO ACTIVITY
-
 let inactivityRedirect = function () {
-  let timeout;
-  const redirectUrl = 'index.html';
-  function resetTimer() {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-          window.location.href = redirectUrl; // Redirects to the specified URL
-      }, 90000); // 1 minute = 60000 ms
-  }
+    // Check if the user is on a mobile device
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt =>
-      window.addEventListener(evt, resetTimer)
-  );
+    if (isMobile) {
+        return; // Do not set up the redirect on mobile devices
+    }
 
-  resetTimer();
+    let timeout;
+    const redirectUrl = 'index.html';
+
+    function resetTimer() {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            window.location.href = redirectUrl;
+        }, 90000); // 1.5 minutes = 90000 ms
+    }
+
+    ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt =>
+        window.addEventListener(evt, resetTimer)
+    );
+
+    resetTimer();
 };
 
 inactivityRedirect();
